@@ -1,0 +1,8 @@
+.board {
+  border: 4px solid black;
+  height:fit-content;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  column-gap: 2px;
+}
