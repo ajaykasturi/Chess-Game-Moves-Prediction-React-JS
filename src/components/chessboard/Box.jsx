@@ -1,35 +1,67 @@
 import React, { useEffect, useState } from "react";
-
+import { FaChessKing as BlackKing } from "react-icons/fa6";
+import { FaRegChessKing as WhiteKing } from "react-icons/fa6";
 export default function Box({
+  turn,
   bg = "",
   handleClick,
   highLightPositions,
   currPosition,
+  whiteKingPosition,
+  blackKingPosition,
+  handleChangePosition,
 }) {
-  const [highLight, setHighLight] = useState("");
-  useEffect(() => {
-    if (highLightPositions.length) {
-      const result = highLightPositions.some(
-        (item) => currPosition.x == item.x && currPosition.y == item.y
-      );
-      console.log(result);
-      if (result) {
-        setHighLight("3px solid green");
-      } else {
-        setHighLight("");
-      }
+  const result = highLightPositions.find(
+    (item) => currPosition.x == item.x && currPosition.y == item.y
+  );
+  const Icon = (() => {
+    if (
+      whiteKingPosition.x == currPosition.x &&
+      whiteKingPosition.y == currPosition.y
+    ) {
+      return BlackKing;
+    } else if (
+      blackKingPosition.x == currPosition.x &&
+      blackKingPosition.y == currPosition.y
+    ) {
+      return WhiteKing;
+    } else {
+      return "";
     }
-  }, [highLightPositions]);
+  })();
+  const handleIconClicking = () => {
+    if (
+      currPosition.x == whiteKingPosition.x &&
+      currPosition.y == whiteKingPosition.y &&
+      turn == "white"
+    ) {
+      handleClick();
+    } else if (
+      currPosition.x == blackKingPosition.x &&
+      currPosition.y == blackKingPosition.y &&
+      turn == "black"
+    ) {
+      handleClick();
+    } else if (result) {
+      handleChangePosition({ x: result.x, y: result.y });
+    }
+  };
   return (
     <div
-      onClick={handleClick}
+      onClick={handleIconClicking}
       style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
         boxSizing: "border-box",
-        height: "50px",
-        width: "50px",
+        height: "80px",
+        width: "80px",
         background: bg,
-        border: highLight,
+        ...result?.borderStyle,
       }}
-    ></div>
+    >
+      {Icon && <Icon color="green" fontSize={50} />}
+    </div>
   );
 }
