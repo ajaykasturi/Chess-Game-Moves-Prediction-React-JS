@@ -5,7 +5,6 @@ export default function Board() {
   const [highLightPositions, setHighLightPositions] = useState([]);
   const handleClick = (pos) => {
     const positions = [
-      pos, //position
       { x: pos.x, y: pos.y - 1 }, //left
       { x: pos.x, y: pos.y + 1 }, //right
       { x: pos.x - 1, y: pos.y }, //top
@@ -16,15 +15,6 @@ export default function Board() {
       { x: pos.x + 1, y: pos.y + 1 }, //right-bottom-diag
     ];
     setHighLightPositions(positions);
-    // console.log(pos);
-    // console.log("left", { x: pos.x, y: pos.y - 1 });
-    // console.log("right", { x: pos.x, y: pos.y + 1 });
-    // console.log("top", { x: pos.x - 1, y: pos.y });
-    // console.log("bottom", { x: pos.x + 1, y: pos.y });
-    // console.log("left-top-diag", { x: pos.x - 1, y: pos.y - 1 });
-    // console.log("right-top-diag", { x: pos.x - 1, y: pos.y + 1 });
-    // console.log("left-bottom-diag", { x: pos.x + 1, y: pos.y - 1 });
-    // console.log("right-bottom-diag", { x: pos.x + 1, y: pos.y + 1 });
   };
   return (
     <div className="board">

@@ -14,7 +14,7 @@ export default function Box({
       );
       console.log(result);
       if (result) {
-        setHighLight("2px solid green");
+        setHighLight("3px solid green");
       } else {
         setHighLight("");
       }
