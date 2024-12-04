@@ -11,10 +11,10 @@ export default function Box({
   blackKingPosition,
   handleChangePosition,
 }) {
-  const result = highLightPositions.find(
+  const highlight = highLightPositions.find(
     (item) => currPosition.x == item.x && currPosition.y == item.y
   );
-  const Icon = (() => {
+  const getIcon = () => {
     if (
       whiteKingPosition.x == currPosition.x &&
       whiteKingPosition.y == currPosition.y
@@ -26,24 +26,23 @@ export default function Box({
     ) {
       return WhiteKing;
     } else {
-      return "";
+      return null;
     }
-  })();
+  };
+  const Icon = getIcon();
   const handleIconClicking = () => {
-    if (
-      currPosition.x == whiteKingPosition.x &&
-      currPosition.y == whiteKingPosition.y &&
-      turn == "white"
-    ) {
+    const isWhiteTurn =
+      currPosition.x === whiteKingPosition.x &&
+      currPosition.y === whiteKingPosition.y &&
+      turn === "white";
+    const isBlackTurn =
+      currPosition.x === blackKingPosition.x &&
+      currPosition.y === blackKingPosition.y &&
+      turn === "black";
+    if (isWhiteTurn || isBlackTurn) {
       handleClick();
-    } else if (
-      currPosition.x == blackKingPosition.x &&
-      currPosition.y == blackKingPosition.y &&
-      turn == "black"
-    ) {
-      handleClick();
-    } else if (result) {
-      handleChangePosition({ x: result.x, y: result.y });
+    } else if (highlight) {
+      handleChangePosition({ x: highlight.x, y: highlight.y });
     }
   };
   return (
@@ -58,7 +57,7 @@ export default function Box({
         height: "80px",
         width: "80px",
         background: bg,
-        ...result?.borderStyle,
+        ...highlight?.borderStyle,
       }}
     >
       {Icon && <Icon color="green" fontSize={50} />}
