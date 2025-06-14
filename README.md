@@ -8,4 +8,4 @@ Currently, two official plugins are available:
 - npm install
 - npm run dev
 
-
+[![Demo Video](https://img.youtube.com/vi/abcd1234/0.jpg)](https://youtu.be/tbM-Zrb1Zf0)
